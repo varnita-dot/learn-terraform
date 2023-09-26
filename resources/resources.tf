@@ -5,5 +5,12 @@ resource "aws_instance" "web" {
   tags = {
     Name = "FirstTerraformEC2"
   }
+}
 
+resource "aws_route53_record" "www" {
+  zone_id = "Z09045272FOIJI3ZIE9SI"
+  name    = "terra.varraj20316.online"
+  type    = "A"
+  ttl     = 300
+  records = [aws_instance.web.private_ip]
 }
