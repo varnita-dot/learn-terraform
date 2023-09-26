@@ -23,6 +23,6 @@ output "fruits" {
 }
 
 output "MapOfFruits" {
-  value = var.MapOfFruits.apple
+  value = "value of apple  is ${var.MapOfFruits.apple}"
 }
 
