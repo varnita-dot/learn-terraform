@@ -16,6 +16,13 @@ variable "MapOfFruits"{
 
 output "fruit" {
   value = var.fruit
-  value1 = var.fruits[1]
-  value3 = var.MapOfFruits.apple
 }
+
+output "fruits" {
+  value = var.fruits[1]
+}
+
+output "MapOfFruits" {
+  value = var.MapOfFruits.apple
+}
+
