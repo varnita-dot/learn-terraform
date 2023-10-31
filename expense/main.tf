@@ -9,6 +9,12 @@ data "aws_security_group" "security_group_name" {
 }
 
 data "aws_route53_zone" "zone_id" {
-  name         = "Z09045272FOIJI3ZIE9SI"
+  name         = var.zone_id
   #private_zone = true
 }
+
+variable "zone_id" {
+  default = "varraj20316.online"
+}
+
+
