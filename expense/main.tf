@@ -8,7 +8,7 @@ data "aws_security_group" "sg" {
   name = "allow-all"
 }
 
-data "aws_route53_zone" "zone_id" {
+data "aws_route53_zone" "zone" {
   name         = var.zone_id
   #private_zone = true
 }
