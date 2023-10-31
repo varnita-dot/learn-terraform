@@ -10,9 +10,9 @@ resource "null_resource" "frontend" {
   depends_on = [aws_route53_record.frontend]
   provisioner "local-exec" {
     command = <<EOF
-cd /home/centos/firstAnsibleProject
+cd /home/centos/learn-terraform
 git pull
-sleep
+sleep 60
 ansible ${aws_instance.frontend.private_ip}, -e ansible_user=centos -e ansible_password = DevOps321 expense.yml -e service_name=frontend
     EOF
   }
@@ -39,7 +39,7 @@ resource "null_resource" "mysql" {
   depends_on = [aws_route53_record.mysql]
   provisioner "local-exec" {
     command = <<EOF
-cd /home/centos/firstAnsibleProject
+cd /home/centos/learn-terraform
 git pull
 sleep
 ansible ${aws_instance.mysql.private_ip}, -e ansible_user=centos -e ansible_password = DevOps321 expense.yml -e service_name=mysql
@@ -70,7 +70,7 @@ resource "null_resource" "backend" {
   depends_on = [aws_route53_record.backend]
   provisioner "local-exec" {
     command = <<EOF
-cd /home/centos/firstAnsibleProject
+cd /home/centos/learn-terraform
 git pull
 sleep
 ansible ${aws_instance.backend.private_ip}, -e ansible_user=centos -e ansible_password = DevOps321 expense.yml -e service_name=backend
