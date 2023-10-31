@@ -5,7 +5,7 @@ data "aws_ami" "ami_name" {
 }
 
 data "aws_security_group" "security_group_name" {
-  id = sg-061c2870eae3922b5
+  name = "allow-all"
 }
 
 data "aws_route53_zone" "zone_id" {
