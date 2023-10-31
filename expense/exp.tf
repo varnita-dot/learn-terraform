@@ -1,17 +1,19 @@
 resource "aws_instance" "frontend" {
-  ami = data.aws_ami.example.image_id
-  instance_type = "t3.micro"
+  ami                    = data.aws_ami.example.image_id
+  instance_type          = "t3.micro"
   vpc_security_group_ids = [data.aws_security_group.sg.id]
-  tags = {
+  tags                   = {
     Name = "frontend"
   }
-
+}
+resource "null_resource" "frontend" {
+  depends_on = [aws_route53_record.frontend]
   provisioner "local-exec" {
     command = <<EOF
 cd /home/centos/firstAnsibleProject
 git pull
 sleep
-ansible ${self.private_ip}, -e ansible_user=centos -e ansible_password = DevOps321 expense.yml -e service_name=frontend
+ansible ${aws_instance.frontend}, -e ansible_user=centos -e ansible_password = DevOps321 expense.yml -e service_name=frontend
     EOF
   }
 }
@@ -31,16 +33,20 @@ resource "aws_instance" "mysql" {
   tags                   = {
     Name = "mysql"
   }
+}
 
+resource "null_resource" "mysql" {
+  depends_on = [aws_route53_record.mysql]
   provisioner "local-exec" {
     command = <<EOF
 cd /home/centos/firstAnsibleProject
 git pull
 sleep
-ansible ${self.private_ip}, -e ansible_user=centos -e ansible_password = DevOps321 expense.yml -e service_name=mysql
+ansible ${aws_instance.mysql}, -e ansible_user=centos -e ansible_password = DevOps321 expense.yml -e service_name=mysql
     EOF
   }
 }
+
 
 
 resource "aws_route53_record" "mysql" {
@@ -58,17 +64,19 @@ resource "aws_instance" "backend" {
   tags                   = {
     Name = "backend"
   }
+}
 
+resource "null_resource" "backend" {
+  depends_on = [aws_route53_record.backend]
   provisioner "local-exec" {
     command = <<EOF
 cd /home/centos/firstAnsibleProject
 git pull
 sleep
-ansible ${self.private_ip}, -e ansible_user=centos -e ansible_password = DevOps321 expense.yml -e service_name=backend
+ansible ${aws_instance.backend}, -e ansible_user=centos -e ansible_password = DevOps321 expense.yml -e service_name=backend
     EOF
   }
 }
-
 
 resource "aws_route53_record" "backend" {
   zone_id = data.aws_route53_zone.zone.zone_id
