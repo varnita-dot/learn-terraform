@@ -13,7 +13,7 @@ resource "null_resource" "frontend" {
 cd /home/centos/firstAnsibleProject
 git pull
 sleep
-ansible ${aws_instance.frontend}, -e ansible_user=centos -e ansible_password = DevOps321 expense.yml -e service_name=frontend
+ansible ${aws_instance.frontend.private_ip}, -e ansible_user=centos -e ansible_password = DevOps321 expense.yml -e service_name=frontend
     EOF
   }
 }
@@ -42,7 +42,7 @@ resource "null_resource" "mysql" {
 cd /home/centos/firstAnsibleProject
 git pull
 sleep
-ansible ${aws_instance.mysql}, -e ansible_user=centos -e ansible_password = DevOps321 expense.yml -e service_name=mysql
+ansible ${aws_instance.mysql.private_ip}, -e ansible_user=centos -e ansible_password = DevOps321 expense.yml -e service_name=mysql
     EOF
   }
 }
@@ -73,7 +73,7 @@ resource "null_resource" "backend" {
 cd /home/centos/firstAnsibleProject
 git pull
 sleep
-ansible ${aws_instance.backend}, -e ansible_user=centos -e ansible_password = DevOps321 expense.yml -e service_name=backend
+ansible ${aws_instance.backend.private_ip}, -e ansible_user=centos -e ansible_password = DevOps321 expense.yml -e service_name=backend
     EOF
   }
 }
