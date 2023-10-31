@@ -28,6 +28,4 @@
 #
 #
 
-#variable "zone_id" {
-#  default = "varraj20316.online"
-#}
+
